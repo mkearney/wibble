@@ -86,7 +86,7 @@ parse_json <- function(x) {
     if (grepl("^\\[\\{", x)) {
       j <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
       if (!is.null(j)) {
-        j <- tfse:::peel_lists(j)
+        j <- tfse::peel_lists(j)
         if (is.data.frame(j)) j <- tryCatch(tfse::as_tbl(j),
           error = function(e) return(j))
         return(j)
@@ -120,9 +120,9 @@ parse_json <- function(x) {
   ## return o
   o <- o[lengths(o) > 0]
   if (length(o) == 0) return(o)
-  o <- lapply(o, tfse:::peel_lists)
+  o <- lapply(o, tfse::peel_lists)
   o <- unique(o)
-  tfse:::peel_lists(o)
+  tfse::peel_lists(o)
 }
 
 
@@ -161,7 +161,7 @@ safely_fromJSON <- function(x) {
   x <- x[lengths(x) > 0]
   names(x) <- paste0("j", seq_along(x))
   x <- flattendfs(x)
-  tfse:::peel_lists(x)
+  tfse::peel_lists(x)
 }
 
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://getwebdata.mikewk.com//index.html</loc>
+  </url>
+  <url>
+    <loc>https://getwebdata.mikewk.com//reference/parse_json.html</loc>
+  </url>
+  <url>
+    <loc>https://getwebdata.mikewk.com//reference/read_as_xml.html</loc>
+  </url>
+  <url>
+    <loc>https://getwebdata.mikewk.com//reference/scrape_links.html</loc>
+  </url>
+</urlset>

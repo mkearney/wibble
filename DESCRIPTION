@@ -15,4 +15,6 @@ Imports:
     rvest,
     httr,
     jsonlite,
-    magrittr
+    magrittr,
+    R6,
+    tfse

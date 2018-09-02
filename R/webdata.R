@@ -2,12 +2,13 @@
 read_webdata <- function(x) {
   structure(
     httr::GET(x),
-    class = "webdata"
+    class = c("webdata", "response")
   )
 }
 
 cat_call <- function(..., collapse = "", fill = TRUE) {
-  cat(paste(unlist(list(...)), collapse = collapse), fill = fill)
+  dots <- list(...)
+  cat(paste(unlist(dots), collapse = collapse), fill = fill)
 }
 
 is_html <- function(x) {

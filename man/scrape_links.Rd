@@ -4,15 +4,15 @@
 \alias{scrape_links}
 \title{scrape URL links from a webpage}
 \usage{
-scrape_links(rurl, qs = TRUE, pat = ".")
+scrape_links(x, qs = TRUE, pat = ".")
 }
 \arguments{
-\item{rurl}{URL to desired page. Should include scheme (http/https)}
-
 \item{qs}{Logical indicating whether to return query strings (part of URL starting with ?)}
 
 \item{pat}{Pattern from which only matching results should be returned. Defaults to ".",
 which matches everything.}
+
+\item{rurl}{URL to desired page. Should include scheme (http/https)}
 }
 \value{
 Character vector of URLs.

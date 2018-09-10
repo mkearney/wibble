@@ -7,6 +7,17 @@ webpage_meta <- function(timestamp = NULL, status = NULL) {
   list(timestamp = timestamp, status = status)
 }
 
+#' Webpage object
+#'
+#' An R6 class to represent source code/data associated with a URL (website).
+#'
+#' @section Functions
+#'
+#' \describe{
+#' \item{one}{description}
+#' }
+#'
+#' @export
 Webpage <- R6::R6Class("Webpage", list(
   url = NULL,
   timestamp = NULL,

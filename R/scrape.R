@@ -167,12 +167,12 @@ safely_fromJSON <- function(x) {
 
 flattendfs <- function(x) {
   if (is.atomic(x[[1]]) && length(x[[1]]) == 1L) return(NULL)
-  if (!is.data.frame(x) && is.data.frame(x[[1]])) x <- tfse::as_tbl(x[[1]])
+  if (!is.data.frame(x) && is.data.frame(x[[1]])) x <- tbltools::as_tbl(x[[1]])
   if (!is.data.frame(x) && is.list(x[[1]]) &
-      length(x[[1]]) == 1 & is.data.frame(x[[1]][[1]])) x <- tfse::as_tbl(x[[1]][[1]])
-  if (is.data.frame(x)) x <- tfse::as_tbl(x)
+      length(x[[1]]) == 1 & is.data.frame(x[[1]][[1]])) x <- tbltools::as_tbl(x[[1]][[1]])
+  if (is.data.frame(x)) x <- tbltools::as_tbl(x)
   if (is.list(x[[1]]) && length(unique(lengths(x[[1]]))) == 1) {
-    x <- tfse::as_tbl(x[[1]])
+    x <- tbltools::as_tbl(x[[1]])
   }
   x
 }

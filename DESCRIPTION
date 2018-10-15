@@ -17,4 +17,5 @@ Imports:
     jsonlite,
     magrittr,
     R6,
-    tfse
+    tfse,
+    tbltools

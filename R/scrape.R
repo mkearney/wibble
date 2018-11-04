@@ -87,7 +87,7 @@ parse_json <- function(x) {
       j <- tryCatch(jsonlite::fromJSON(x), error = function(e) return(NULL))
       if (!is.null(j)) {
         j <- tfse::peel_lists(j)
-        if (is.data.frame(j)) j <- tryCatch(tfse::as_tbl(j),
+        if (is.data.frame(j)) j <- tryCatch(tbltools::as_tbl(j),
           error = function(e) return(j))
         return(j)
       }

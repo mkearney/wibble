@@ -4,12 +4,27 @@
     <loc>https://getwebdata.mikewk.com//index.html</loc>
   </url>
   <url>
+    <loc>https://getwebdata.mikewk.com//reference/Webpage.html</loc>
+  </url>
+  <url>
+    <loc>https://getwebdata.mikewk.com//reference/coerce_tbls.html</loc>
+  </url>
+  <url>
     <loc>https://getwebdata.mikewk.com//reference/parse_json.html</loc>
+  </url>
+  <url>
+    <loc>https://getwebdata.mikewk.com//reference/pipe.html</loc>
   </url>
   <url>
     <loc>https://getwebdata.mikewk.com//reference/read_as_xml.html</loc>
   </url>
   <url>
     <loc>https://getwebdata.mikewk.com//reference/scrape_links.html</loc>
+  </url>
+  <url>
+    <loc>https://getwebdata.mikewk.com//reference/unpack.html</loc>
+  </url>
+  <url>
+    <loc>https://getwebdata.mikewk.com//reference/unpack_all.html</loc>
   </url>
 </urlset>

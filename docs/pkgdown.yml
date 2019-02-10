@@ -1,6 +1,6 @@
-pandoc: 2.2.3.2
-pkgdown: 1.1.0.9000
-pkgdown_sha: ad5a58780c6551af53561df51b58bc874ca8ccd8
+pandoc: '2.6'
+pkgdown: 1.3.0
+pkgdown_sha: ~
 articles: []
 urls:
   reference: https://getwebdata.mikewk.com//reference

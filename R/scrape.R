@@ -77,7 +77,85 @@ read_as_xml <- function(x) {
 #' parse_json('<html>{\"mpg\":21,\"cyl\":6,\"disp\":160,\"lgl\":false}</html>')
 #' }
 #' @export
-parse_json <- function(x) {
+parse_json <- function(x) UseMethod("parse_json")
+
+#' @export
+parse_json.default <- function(x) {
+  x <- as.character(x)
+  parse_json(x)
+}
+
+#' @export
+parse_json.file <- function(x) {
+  on.exit(close(x), add = TRUE)
+  x <- xml2::read_html(x)
+  parse_json(x)
+}
+
+#' @export
+parse_json.url <- function(x) {
+  x <- xml2::read_html(x)
+  parse_json(x)
+}
+
+#' @export
+parse_json.xml_document <- function(x) {
+  x <- paste0(as.character(x), collapse = "\n")
+  parse_json(x)
+}
+
+
+#' @export
+parse_json.character <- function(x) {
+  ## if URL
+  if (length(x) == 1 && grepl("^http", x)) {
+    x <- url(x)
+    return(parse_json(x))
+  }
+  ## if local file
+  if (length(x) == 1 && file.exists(x)) {
+    x <- file(x)
+    return(parse_json(x))
+  }
+  ## collapse into single x
+  if (length(x) > 1) {
+    x <- paste(x, collapse = "\n")
+  }
+
+  ## try it
+  if (grepl("^\\[|^\\{", x) && grepl("\\}$|\\]$", x)) {
+    j <- try_from_json(x)
+    if (!is.null(j)) {
+      return(j)
+    }
+  }
+
+  ## extract [{content}]
+  m <- tfse::gregexpr_(x, "\\[\\{\"[^\\]]+(?=\\}\\])")
+  d <- unlist(regmatches(x, m), use.names = FALSE)
+  if (length(d) > 0) {
+    d <- paste0(d, "}]")
+    regmatches(x, m) <- ""
+  }
+
+  ## extract {content}
+  m <- tfse::gregexpr_(x, "\\{\"[^\\}]+(?=\\})")
+  e <- unlist(regmatches(x, m), use.names = FALSE)
+  if (length(e) > 0) {
+    e <- paste0(e, "}")
+    regmatches(x, m) <- ""
+  }
+  ## add braces then extract {content}
+  #x <- paste0("{", x, "}")
+  ## combine extracted content
+  x <- c(d, e)
+  ## convert from JSON to list
+  x <- dapr::lap(x, try_from_json)
+  ## return parsed observations
+  x[lengths(x) > 0L]
+}
+
+parse_json2 <- function(x) {
   ## validate input
   stopifnot(is.character(x))
   ## when x is chr and len 1
@@ -177,3 +255,14 @@ flattendfs <- function(x) {
   x
 }
 
+
+any_recursive <- function(x) any(vap_lgl(x, is.recursive))
+recursives <- function(x) which(vap_lgl(x, is.recursive))
+
+is_named <- function(x) length(x) > 0 && !is.null()
+
+
+try_from_json <- function(x) {
+  tryCatch(jsonlite::fromJSON(x),
+    error = function(e) list())
+}

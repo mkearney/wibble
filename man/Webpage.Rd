@@ -11,4 +11,13 @@ Webpage
 \description{
 An R6 class to represent source code/data associated with a URL (website).
 }
+\section{Functions}{
+
+Some text here
+
+\describe{
+\item{one}{description}
+}
+}
+
 \keyword{datasets}

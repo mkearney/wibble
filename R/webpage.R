@@ -11,7 +11,8 @@ webpage_meta <- function(timestamp = NULL, status = NULL) {
 #'
 #' An R6 class to represent source code/data associated with a URL (website).
 #'
-#' @section Functions
+#' @section Functions:
+#' Some text here
 #'
 #' \describe{
 #' \item{one}{description}

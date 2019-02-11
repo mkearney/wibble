@@ -87,7 +87,6 @@ parse_json.default <- function(x) {
 
 #' @export
 parse_json.file <- function(x) {
-  on.exit(close(x), add = TRUE)
   x <- xml2::read_html(x)
   parse_json(x)
 }
@@ -124,16 +123,22 @@ parse_json.character <- function(x) {
 
   ## try it
   if (grepl("^\\[|^\\{", x) && grepl("\\}$|\\]$", x)) {
+    tfse::print_complete("Detected JSON input")
     j <- try_from_json(x)
     if (!is.null(j)) {
+      tfse::print_complete("Conversion via `jsonlite::fromJSON()` successful!")
       return(j)
     }
+    cat("\U274C Initial conversion via `jsonlite::fromJSON()` failed",
+      fill = TRUE)
   }
 
   ## extract [{content}]
   m <- tfse::gregexpr_(x, "\\[\\{\"[^\\]]+(?=\\}\\])")
   d <- unlist(regmatches(x, m), use.names = FALSE)
   if (length(d) > 0) {
+    tfse::print_complete(
+      sprintf("'[{...}]' JSON strings detected: %s", num_length(d)))
     d <- paste0(d, "}]")
     regmatches(x, m) <- ""
   }
@@ -142,17 +147,67 @@ parse_json.character <- function(x) {
   m <- tfse::gregexpr_(x, "\\{\"[^\\}]+(?=\\})")
   e <- unlist(regmatches(x, m), use.names = FALSE)
   if (length(e) > 0) {
+    tfse::print_complete(
+      sprintf(" '{...}'  JSON strings detected: %s", num_length(e)))
     e <- paste0(e, "}")
     regmatches(x, m) <- ""
   }
-  ## add braces then extract {content}
-  #x <- paste0("{", x, "}")
+
   ## combine extracted content
   x <- c(d, e)
   ## convert from JSON to list
   x <- dapr::lap(x, try_from_json)
+  tfse::print_complete(sprintf(
+    "JSON conversions success/total : %s/%s",
+    num(sum(lengths(x) > 0)), num_length(x)))
   ## return parsed observations
   x[lengths(x) > 0L]
+}
+
+is_integer_like <- function(x) {
+  if (!is.numeric(x)) return(FALSE)
+  if (is.integer(x)) return(TRUE)
+  all((tfse::na_omit(x) %% 1) == 0)
+}
+
+num <- function(x) {
+  if (is.character(x) && all(grepl("^\\d+$", x))) {
+    x <- as.numeric(x)
+  }
+  if (is_integer_like(x) || (is.numeric(x) & all(x >= 100.0))) {
+    x <- formatC(x, digits = 8, big.mark = ",")
+  }
+  if (is.numeric(x)) {
+    sp <- getOption("scipen")
+    on.exit(options(scipen = sp))
+    options(scipen = 10)
+    x <- formatC(x, digits = 4, big.mark = ",")
+  }
+  tfse::trim_ws(x)
+}
+
+num_length <- function(x) {
+  num(length(x))
+}
+
+tbl_and_bind_one <- function(x) {
+  tryCatch(
+    x <- suppressWarnings(tbltools::bind_rows_data(
+      dapr::lap(x, tbltools::as_tbl_data), fill = TRUE)),
+    error = function(e) x)
+}
+
+#' Convert to tbl and then bind rows
+#'
+#' Convert lists to data frames then bind rows
+#'
+#' @param x Input list
+#' @return A list of data frames and lists
+#' @export
+tbl_and_bind <- function(x) {
+  nms <- dapr::vap_chr(x, ~ paste(sort(names(.x)), collapse = ","))
+  x <- split(x, as.integer(factor(nms)))
+  dapr::lap(x, tbl_and_bind_one)
 }
 
 parse_json2 <- function(x) {

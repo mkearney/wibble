@@ -12,6 +12,9 @@ h_nodes.xml_document <- function(.x, .n) {
   xml2::xml_find_all(.x, selectr::css_to_xpath(.n))
 }
 
+h_nodes.xml_nodeset <- function(.x, .n) {
+  xml2::xml_find_all(.x, selectr::css_to_xpath(.n))
+}
 
 
 h_node <- function(.x, .n) UseMethod("h_node")
@@ -25,6 +28,9 @@ h_node.xml_document <- function(.x, .n) {
   xml2::xml_find_first(.x, selectr::css_to_xpath(.n))
 }
 
+h_node.xml_nodeset <- function(.x, .n) {
+  xml2::xml_find_first(.x, selectr::css_to_xpath(.n))
+}
 
 
 h_text <- function(.x, ...) UseMethod("h_text")
@@ -39,6 +45,13 @@ do_call <- function(what, args) {
 }
 
 h_text.xml_document <- function(.x, ...) {
+  args <- capture_dots(x = .x, ...)
+  args <- tfse::add_arg_if(args, trim = TRUE)
+  do_call(xml2::xml_text, args)
+}
+
+
+h_text.xml_nodeset <- function(.x, ...) {
   args <- capture_dots(x = .x, ...)
   args <- tfse::add_arg_if(args, trim = TRUE)
   do_call(xml2::xml_text, args)

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# getwebdata <img src="man/figures/logo.png" width="160px" align="right" />
+# wibble <img src="man/figures/logo.png" width="160px" align="right" />
 
 <!-- [![Build Status](https://travis-ci.org/mkearney/rtweet.svg?branch=master)](https://travis-ci.org/mkearney/rtweet)
 [![CRAN status](https://www.r-pkg.org/badges/version/rtweet)](https://cran.r-project.org/package=rtweet)
@@ -20,5 +20,5 @@ Install the dev version from Github:
 
 ``` r
 ## from github
-remotes::install_github("mkearney/getwebdata")
+remotes::install_github("mkearney/wibble")
 ```

@@ -1,4 +1,4 @@
-url: https://getwebdata.mikewk.com/
+url: https://wibble.mikewk.com/
 
 template:
   ganalytics: "UA-64959413-1"
@@ -9,5 +9,5 @@ authors:
 navbar:
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/mkearney/getwebdata
+    href: https://github.com/mkearney/wibble
 

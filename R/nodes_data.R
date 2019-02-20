@@ -6,7 +6,9 @@ as_num <- function(.x) {
 }
 
 as_int <- function(.x) {
-  .x <- tfse::regmatches_first(.x, "(-?[0-9][0-9\\.\\,]+)|(-?[\\.][0-9][0-9\\.\\,]+)")
+  .x <- tfse::regmatches_first(.x,
+    "(-?[0-9][0-9\\.\\,]+)|(-?[\\.][0-9][0-9\\.\\,]+)|(-?[0-9]+)")
+  if (length(.x) == 0) return(NA_integer_)
   .x <- gsub("[^0-9\\.-]", "", .x)
   suppressWarnings(as.integer(.x))
 }
@@ -103,8 +105,8 @@ add_node_dbl.default <- function(.x, ...) {
   .n <- tbltools:::pretty_dots(...)
   v <- rvest::html_node(xml, .n[[1]])
   v <- rvest::html_text(v, trim = TRUE)
-  .x[[names(.n)]] <- dapr::vap_lgl(v, ~ {
-    if (length(.x) == 0) NA_character_ else as_num(.x)}
+  .x[[names(.n)]] <- dapr::vap_dbl(v, ~ {
+    if (length(.x) == 0) NA_real_ else as_num(.x)}
   )
   attr(.x, "xml_data") <- xml
   class(.x) <- c("wbl_df", "wbl", "data.frame")
@@ -119,8 +121,8 @@ add_node_int.default <- function(.x, ...) {
   .n <- tbltools:::pretty_dots(...)
   v <- rvest::html_node(xml, .n[[1]])
   v <- rvest::html_text(v, trim = TRUE)
-  .x[[names(.n)]] <- dapr::vap_lgl(v, ~ {
-    if (length(.x) == 0) NA_character_ else as_int(.x)}
+  .x[[names(.n)]] <- dapr::vap_int(v, ~ {
+    if (length(.x) == 0) NA_integer_ else as_int(.x)}
   )
   attr(.x, "xml_data") <- xml
   class(.x) <- c("wbl_df", "wbl", "data.frame")

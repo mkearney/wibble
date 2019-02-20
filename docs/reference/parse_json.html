@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>grab json — parse_json • getwebdata</title>
+<title>Parse JSON values from object — parse_json • wibble</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,11 +32,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="grab json — parse_json" />
+<meta property="og:title" content="Parse JSON values from object — parse_json" />
 
-<meta property="og:description" content="grab json" />
+<meta property="og:description" content="Detects and parses JSON text into R objects" />
 
-<meta property="og:image" content="https://getwebdata.mikewk.com/logo.png" />
+<meta property="og:image" content="https://wibble.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +66,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">getwebdata</a>
+        <a class="navbar-link" href="../index.html">wibble</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -86,7 +86,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mkearney/getwebdata">
+  <a href="https://github.com/mkearney/wibble">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -103,14 +103,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>grab json</h1>
+    <h1>Parse JSON values from object</h1>
     
     <div class="hidden name"><code>parse_json.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>grab json</p>
+    <p>Detects and parses JSON text into R objects</p>
     
     </div>
 
@@ -121,22 +121,24 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>input</p></td>
+      <td><p>Input object</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>if json found then parsed list</p>
+    <p>Parsed JSON (if detected)</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## scrape espn</span>
+<span class='co'>## parse JSON text found on espn's homepage</span>
 <span class='no'>e</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_json</span>(<span class='st'>"http:/www.espn.com/"</span>)
+
+<span class='co'>## view parsed object</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>e</span>, <span class='fl'>3</span>)
 
-<span class='co'>## convert html text</span>
+<span class='co'>## parse JSON from html string</span>
 <span class='fu'>parse_json</span>(<span class='st'>'&lt;html&gt;{\"mpg\":21,\"cyl\":6,\"disp\":160,\"lgl\":false}&lt;/html&gt;'</span>)
 <span class='co'># }</span></pre>
   </div>

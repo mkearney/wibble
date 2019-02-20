@@ -16,8 +16,67 @@ as_int <- function(.x) {
 
 set_obs_level <- function(.x, .n) UseMethod("set_obs_level")
 
+as_nodes_og <- function(.x, .n) {
+  if (!inherits(.x, "xml_node")) {
+    .x <- get_xml_data(.x)
+  }
+  if (!grepl("\\[\\d+\\]", .n)) {
+    return(rvest::html_nodes(.x, .n))
+  }
+  i <- tfse::regmatches_first(.n, "\\[\\d+\\]")
+  i <- as.integer(gsub("^\\[|\\]", "", i))
+  .n1 <- sub("\\[\\d+\\].*", "", .n)
+  xml <- rvest::html_nodes(.x, .n1)[[i]]
+  if (grepl("\\[\\d+\\].{1,}$", .n)) {
+    .n2 <- tfse::regmatches_first(.n, "\\[\\d+\\].*")
+    .n2 <- sub("\\[\\d+\\]", "", .n2)
+    xml <- rvest::html_nodes(xml, .n2)
+  }
+  xml
+}
+
+
+as_nodes <- function(.x, .n) {
+  if (!inherits(.x, "xml_node")) {
+    .x <- get_xml_data(.x)
+  }
+  if (!grepl("\\[\\d+\\]", .n)) {
+    return(dapr::lap(.x, rvest::html_nodes, .n))
+  }
+  i <- tfse::regmatches_first(.n, "\\[\\d+\\]")
+  i <- as.integer(gsub("^\\[|\\]", "", i))
+  .n1 <- sub("\\[\\d+\\].*", "", .n)
+  .x <- dapr::lap(.x, ~ rvest::html_nodes(.x, .n1)[[i]])
+  if (grepl("\\[\\d+\\].{1,}$", .n)) {
+    .n2 <- tfse::regmatches_first(.n, "\\[\\d+\\].*")
+    .n2 <- sub("\\[\\d+\\]", "", .n2)
+    .x <- dapr::lap(.x, rvest::html_nodes, .n2)
+  }
+  .x
+}
+
+
+as_node <- function(.x, .n) {
+  if (!inherits(.x, "xml_node")) {
+    .x <- get_xml_data(.x)
+  }
+  if (!grepl("\\[\\d+\\]", .n)) {
+    return(rvest::html_node(.x, .n))
+  }
+  i <- tfse::regmatches_first(.n, "\\[\\d+\\]")
+  i <- as.integer(gsub("^\\[|\\]", "", i))
+  .n1 <- sub("\\[\\d+\\].*", "", .n)
+  xml <- rvest::html_nodes(.x, .n1)[[i]]
+  if (grepl("\\[\\d+\\].{1,}$", .n)) {
+    .n2 <- tfse::regmatches_first(.n, "\\[\\d+\\].*")
+    .n2 <- sub("\\[\\d+\\]", "", .n2)
+    xml <- rvest::html_node(xml, .n2)
+  }
+  xml
+}
+
 set_obs_level.default <- function(.x, .n) {
-  xml <- rvest::html_nodes(.x, .n)
+  xml <- as_nodes_og(.x, .n)
   .x <- dapr::lap(xml, ~ as.list(rvest::html_attrs(.x)))
   for (i in seq_along(.x)) {
     .x[[i]]$.node_id <- i

@@ -12,7 +12,7 @@
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-> Making it easy to get web data
+> Web Data Frames
 
 ## Install
 

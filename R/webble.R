@@ -10,5 +10,5 @@ webble <- function(url) UseMethod("webble")
 
 #' @export
 webble.character <- function(url) {
-  .as_xml(webbler(url))
+  webble_call(url)
 }

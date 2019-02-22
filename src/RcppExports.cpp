@@ -33,14 +33,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// webbler
-std::string webbler(std::string url);
-RcppExport SEXP _wibble_webbler(SEXP urlSEXP) {
+// webble_call
+std::string webble_call(std::string url);
+RcppExport SEXP _wibble_webble_call(SEXP urlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type url(urlSEXP);
-    rcpp_result_gen = Rcpp::wrap(webbler(url));
+    rcpp_result_gen = Rcpp::wrap(webble_call(url));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -94,7 +94,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_wibble_api_call", (DL_FUNC) &_wibble_api_call, 4},
     {"_wibble_api_calls", (DL_FUNC) &_wibble_api_calls, 4},
-    {"_wibble_webbler", (DL_FUNC) &_wibble_webbler, 1},
+    {"_wibble_webble_call", (DL_FUNC) &_wibble_webble_call, 1},
     {"_wibble_path_source", (DL_FUNC) &_wibble_path_source, 1},
     {"_wibble_dots_example", (DL_FUNC) &_wibble_dots_example, 2},
     {"_wibble_lst_tbl", (DL_FUNC) &_wibble_lst_tbl, 1},

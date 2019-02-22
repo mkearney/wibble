@@ -9,8 +9,8 @@ api_calls <- function(url, query, value, path = "") {
     .Call(`_wibble_api_calls`, url, query, value, path)
 }
 
-webbler <- function(url) {
-    .Call(`_wibble_webbler`, url)
+webble_call <- function(url) {
+    .Call(`_wibble_webble_call`, url)
 }
 
 path_source <- function(path) {

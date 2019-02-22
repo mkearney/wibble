@@ -135,3 +135,51 @@ List path_source(std::string path) {
   Function f("source_path");
   return f(source_spec);
 }
+
+
+
+// [[Rcpp::export]]
+DataFrame dots_example(List data, List dots){
+  int n_data = data.size();
+  int n_dots = dots.size();
+  int n = n_data + n_dots;
+  List lst = List(n);
+  CharacterVector nms = CharacterVector(n);
+  CharacterVector names_data = data.names();
+  CharacterVector names_dots = dots.names();
+
+  for (int i=0; i < n_data; i++) {
+    lst[i] = data[i];
+    nms[i] = names_data[i];
+  }
+  for (int i=0; i < n_dots; i++) {
+    lst[i + n_data] = dots[i];
+    nms[i + n_data] = names_dots[i];
+  }
+  lst.names() = nms;
+  DataFrame df = Rcpp::as<Rcpp::DataFrame>(lst);
+  df.attr("class") = CharacterVector::create("tbl_df", "tbl", "data.frame");
+
+  return df;
+}
+
+// [[Rcpp::export]]
+DataFrame lst_tbl(List lst){
+  CharacterVector row_names = lst.attr("row.names");
+  lst.push_front(row_names, "row_names");
+  DataFrame df = DataFrame::create(lst, _["stringsAsFactors"] = false);
+  df.attr("class") = CharacterVector::create("tbl_df", "tbl", "data.frame");
+  return df;
+}
+
+
+// [[Rcpp::export]]
+DataFrame add_data(DataFrame data, List lst) {
+  CharacterVector nms = lst.names();
+  int n = lst.size();
+  for (int i=0; i < n; i++) {
+    data.push_front(Rcpp::as<Rcpp::CharacterVector>(lst[i]),
+      Rcpp::as<std::string>(nms[i]));
+  }
+  return data;
+}

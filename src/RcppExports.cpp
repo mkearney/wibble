@@ -55,12 +55,50 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dots_example
+DataFrame dots_example(List data, List dots);
+RcppExport SEXP _wibble_dots_example(SEXP dataSEXP, SEXP dotsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< List >::type dots(dotsSEXP);
+    rcpp_result_gen = Rcpp::wrap(dots_example(data, dots));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lst_tbl
+DataFrame lst_tbl(List lst);
+RcppExport SEXP _wibble_lst_tbl(SEXP lstSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type lst(lstSEXP);
+    rcpp_result_gen = Rcpp::wrap(lst_tbl(lst));
+    return rcpp_result_gen;
+END_RCPP
+}
+// add_data
+DataFrame add_data(DataFrame data, List lst);
+RcppExport SEXP _wibble_add_data(SEXP dataSEXP, SEXP lstSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< List >::type lst(lstSEXP);
+    rcpp_result_gen = Rcpp::wrap(add_data(data, lst));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_wibble_api_call", (DL_FUNC) &_wibble_api_call, 4},
     {"_wibble_api_calls", (DL_FUNC) &_wibble_api_calls, 4},
     {"_wibble_webbler", (DL_FUNC) &_wibble_webbler, 1},
     {"_wibble_path_source", (DL_FUNC) &_wibble_path_source, 1},
+    {"_wibble_dots_example", (DL_FUNC) &_wibble_dots_example, 2},
+    {"_wibble_lst_tbl", (DL_FUNC) &_wibble_lst_tbl, 1},
+    {"_wibble_add_data", (DL_FUNC) &_wibble_add_data, 2},
     {NULL, NULL, 0}
 };
 

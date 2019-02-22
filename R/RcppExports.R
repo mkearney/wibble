@@ -17,3 +17,15 @@ path_source <- function(path) {
     .Call(`_wibble_path_source`, path)
 }
 
+dots_example <- function(data, dots) {
+    .Call(`_wibble_dots_example`, data, dots)
+}
+
+lst_tbl <- function(lst) {
+    .Call(`_wibble_lst_tbl`, lst)
+}
+
+add_data <- function(data, lst) {
+    .Call(`_wibble_add_data`, data, lst)
+}
+

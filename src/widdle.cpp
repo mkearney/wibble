@@ -1,3 +1,4 @@
+// [[Rcpp::depends(BH)]]
 #include <Rcpp.h>
 #include <iostream>
 #include <string>
@@ -101,7 +102,7 @@ static size_t  web_write(void *ptr,
 
 
 // [[Rcpp::export]]
-std::string widdler(std::string url) {
+std::string webbler(std::string url) {
   CURL *curl = curl_easy_init();
   std::stringstream ss;
   std::string D = "";

@@ -22,6 +22,8 @@ Imports:
     tfse,
     tbltools,
     dapr,
-    Rcpp
+    Rcpp,
+    BH
 LinkingTo: 
+    BH,
     Rcpp

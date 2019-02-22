@@ -1,14 +1,14 @@
 
-#' Widdle
+#' Webble
 #'
 #' Read web data
 #'
 #' @param url Path to file/URL of XML source code
 #' @return An xml_document
 #' @export
-widdle <- function(url) UseMethod("widdle")
+webble <- function(url) UseMethod("webble")
 
 #' @export
-widdle.character <- function(url) {
-  .as_xml(widdler(url))
+webble.character <- function(url) {
+  .as_xml(webbler(url))
 }

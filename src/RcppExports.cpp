@@ -68,7 +68,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // lst_tbl
-DataFrame lst_tbl(List lst);
+List lst_tbl(List lst);
 RcppExport SEXP _wibble_lst_tbl(SEXP lstSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

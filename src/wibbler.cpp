@@ -164,12 +164,15 @@ DataFrame dots_example(List data, List dots){
 }
 
 // [[Rcpp::export]]
-DataFrame lst_tbl(List lst){
+List lst_tbl(List lst){
   CharacterVector row_names = lst.attr("row.names");
   lst.push_front(row_names, "row_names");
-  DataFrame df = DataFrame::create(lst, _["stringsAsFactors"] = false);
-  df.attr("class") = CharacterVector::create("tbl_df", "tbl", "data.frame");
-  return df;
+  //DataFrame df = DataFrame::create(lst, _["stringsAsFactors"] = false);
+  lst.attr("class") = CharacterVector::create("data.frame");
+  int n = lst.size();
+  IntegerVector rows = seq(0, n) + 1;
+  lst.attr("row.names") = Rcpp::as<Rcpp::CharacterVector>(rows);
+  return lst;
 }
 
 

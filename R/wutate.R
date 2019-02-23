@@ -74,3 +74,14 @@ wutate.wbl <- function(.data, ...) {
   }
   .data
 }
+
+
+#' @export
+wutate.wbl_df <- function(.data, ...) {
+  dots <- tbltools:::pretty_dots(...)
+  vars <- names(dots)
+  for (i in seq_along(dots)) {
+    .data[[vars[i]]] <- eval(dots[[i]], .data, parent.frame())
+  }
+  .data
+}

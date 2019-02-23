@@ -33,3 +33,21 @@ Install the dev version from Github:
 remotes::install_github("mkearney/wibble")
 ```
 
+## Example
+
+Scrape/wrangle CNN US site
+
+```{r}
+## load pkg
+library(wibble)
+
+## scrape CNN
+cnn <- webble("https://cnn.com/us")
+
+## wibble and wobble
+cnn %>%
+  wibble() %>%
+  wobble("body div") %>%
+  wobble("ul")
+```
+

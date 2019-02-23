@@ -22,3 +22,35 @@ Install the dev version from Github:
 ## from github
 remotes::install_github("mkearney/wibble")
 ```
+
+## Example
+
+Scrape/wrangle CNN US site
+
+``` r
+## load pkg
+library(wibble)
+
+## scrape CNN
+cnn <- webble("https://cnn.com/us")
+
+## wibble and wobble
+cnn %>%
+  wibble() %>%
+  wobble("body div") %>%
+  wobble("ul")
+#> # A tibble: 173 x 3
+#>    li         a          h2        
+#>    <list>     <list>     <list>    
+#>  1 <list [1]> <list [1]> <list [1]>
+#>  2 <list [1]> <list [1]> <list [1]>
+#>  3 <list [1]> <list [1]> <list [1]>
+#>  4 <list [1]> <list [1]> <list [1]>
+#>  5 <list [1]> <list [1]> <NULL>    
+#>  6 <list [1]> <list [1]> <NULL>    
+#>  7 <list [1]> <list [1]> <NULL>    
+#>  8 <list [1]> <NULL>     <NULL>    
+#>  9 <list [1]> <NULL>     <NULL>    
+#> 10 <list [1]> <NULL>     <NULL>    
+#> # … with 163 more rows
+```

@@ -91,9 +91,10 @@ set_obs_level.default <- function(.x, .n) {
 
 as_tbl_df <- function(x) tibble::as_tibble(get_nodes_data(x))
 
+#' @export
 print.wbl_df <- function(x) {
-  class(x) <- c("tbl_data", "data.frame")
-  print(x)
+  requireNamespace("tibble", quietly = TRUE)
+  tibble:::print.tbl(x)
 }
 
 get_nodes_data <- function(.x) {

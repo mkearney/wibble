@@ -39,18 +39,18 @@ cnn %>%
   wibble() %>%
   wobble("body div") %>%
   wobble("ul")
-#> # A tibble: 173 x 3
-#>    li         a          h2        
-#>    <list>     <list>     <list>    
-#>  1 <list [1]> <list [1]> <list [1]>
-#>  2 <list [1]> <list [1]> <list [1]>
-#>  3 <list [1]> <list [1]> <list [1]>
-#>  4 <list [1]> <list [1]> <list [1]>
-#>  5 <list [1]> <list [1]> <NULL>    
-#>  6 <list [1]> <list [1]> <NULL>    
-#>  7 <list [1]> <list [1]> <NULL>    
-#>  8 <list [1]> <NULL>     <NULL>    
-#>  9 <list [1]> <NULL>     <NULL>    
-#> 10 <list [1]> <NULL>     <NULL>    
-#> # … with 163 more rows
+#> # A tibble: 37 x 3
+#>    li         a         h2       
+#>    <list>     <list>    <list>   
+#>  1 <lgl [1]>  <lgl [1]> <lgl [1]>
+#>  2 <list [4]> <lgl [1]> <lgl [1]>
+#>  3 <list [9]> <lgl [1]> <lgl [1]>
+#>  4 <list [4]> <lgl [1]> <lgl [1]>
+#>  5 <list [6]> <lgl [1]> <lgl [1]>
+#>  6 <list [2]> <lgl [1]> <lgl [1]>
+#>  7 <list [5]> <lgl [1]> <lgl [1]>
+#>  8 <list [5]> <lgl [1]> <lgl [1]>
+#>  9 <list [7]> <lgl [1]> <lgl [1]>
+#> 10 <list [7]> <lgl [1]> <lgl [1]>
+#> # … with 27 more rows
 ```

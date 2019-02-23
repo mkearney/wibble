@@ -29,10 +29,12 @@ List wibble_call(List lst){
   // If single value element(s)
   IntegerVector lens2 = lengths(lst);
   int n1 = min(lens2);
-  if (n1 == 1) {
-    for (int i=0; i < lst_n; i++) {
-      if (lens[i] == 1)
-        lst[i] = rep(lst[i], n);
+  if (n > 1) {
+    if (n1 == 1) {
+      for (int i=0; i < lst_n; i++) {
+        if (lens[i] == 1)
+          lst[i] = rep(lst[i], n);
+      }
     }
   }
 

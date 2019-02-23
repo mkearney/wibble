@@ -6,21 +6,30 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-CharacterVector api_call(std::string url,
-                         CharacterVector query,
-                         CharacterVector value,
-                         std::string path = "") {
-  int n = query.size();
+CharacterVector wabble_call(std::string url,
+                            List query,
+                            std::string path = "") {
+  // Base URL
   if (path != "") {
     if (boost::algorithm::ends_with(url, "/") == 0) {
       url = url + "/";
     }
   }
-  url = url + path + "?";
-  for (int i=0; i < n; i ++) {
-    if (i > 0) url = url + "&";
-    url = url + query[i] + "=" + value[i];
+
+  // Build query
+  int n = query.size();
+  std::string params = "";
+  if (n > 0) {
+    CharacterVector nms = query.attr("names");
+    for (int i=0; i < n; i++) {
+      if (i == 0) params = params + "?";
+      if (i > 0) params = params + "&";
+      params = params + nms[i] + "=" + Rcpp::as<std::string>(query[i]);
+    }
   }
+
+  // Combine
+  url = url + path + params;
   return url;
 }
 

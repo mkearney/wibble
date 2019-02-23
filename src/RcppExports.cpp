@@ -5,17 +5,16 @@
 
 using namespace Rcpp;
 
-// api_call
-CharacterVector api_call(std::string url, CharacterVector query, CharacterVector value, std::string path);
-RcppExport SEXP _wibble_api_call(SEXP urlSEXP, SEXP querySEXP, SEXP valueSEXP, SEXP pathSEXP) {
+// wabble_call
+CharacterVector wabble_call(std::string url, List query, std::string path);
+RcppExport SEXP _wibble_wabble_call(SEXP urlSEXP, SEXP querySEXP, SEXP pathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type url(urlSEXP);
-    Rcpp::traits::input_parameter< CharacterVector >::type query(querySEXP);
-    Rcpp::traits::input_parameter< CharacterVector >::type value(valueSEXP);
+    Rcpp::traits::input_parameter< List >::type query(querySEXP);
     Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
-    rcpp_result_gen = Rcpp::wrap(api_call(url, query, value, path));
+    rcpp_result_gen = Rcpp::wrap(wabble_call(url, query, path));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -34,13 +33,24 @@ BEGIN_RCPP
 END_RCPP
 }
 // webble_call
-std::string webble_call(std::string url);
+List webble_call(std::string url);
 RcppExport SEXP _wibble_webble_call(SEXP urlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type url(urlSEXP);
     rcpp_result_gen = Rcpp::wrap(webble_call(url));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wibble_call
+List wibble_call(List lst);
+RcppExport SEXP _wibble_wibble_call(SEXP lstSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type lst(lstSEXP);
+    rcpp_result_gen = Rcpp::wrap(wibble_call(lst));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -67,17 +77,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// lst_tbl
-List lst_tbl(List lst);
-RcppExport SEXP _wibble_lst_tbl(SEXP lstSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type lst(lstSEXP);
-    rcpp_result_gen = Rcpp::wrap(lst_tbl(lst));
-    return rcpp_result_gen;
-END_RCPP
-}
 // add_data
 DataFrame add_data(DataFrame data, List lst);
 RcppExport SEXP _wibble_add_data(SEXP dataSEXP, SEXP lstSEXP) {
@@ -92,12 +91,12 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_wibble_api_call", (DL_FUNC) &_wibble_api_call, 4},
+    {"_wibble_wabble_call", (DL_FUNC) &_wibble_wabble_call, 3},
     {"_wibble_api_calls", (DL_FUNC) &_wibble_api_calls, 4},
     {"_wibble_webble_call", (DL_FUNC) &_wibble_webble_call, 1},
+    {"_wibble_wibble_call", (DL_FUNC) &_wibble_wibble_call, 1},
     {"_wibble_path_source", (DL_FUNC) &_wibble_path_source, 1},
     {"_wibble_dots_example", (DL_FUNC) &_wibble_dots_example, 2},
-    {"_wibble_lst_tbl", (DL_FUNC) &_wibble_lst_tbl, 1},
     {"_wibble_add_data", (DL_FUNC) &_wibble_add_data, 2},
     {NULL, NULL, 0}
 };

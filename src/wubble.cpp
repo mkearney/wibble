@@ -32,8 +32,6 @@ List path_source(std::string path) {
   return f(source_spec);
 }
 
-
-
 // [[Rcpp::export]]
 DataFrame dots_example(List data, List dots){
   int n_data = data.size();
@@ -58,29 +56,6 @@ DataFrame dots_example(List data, List dots){
 
   return df;
 }
-
-// [[Rcpp::export]]
-List lst_tbl(List lst){
-  Function lengths("lengths");
-  Function rep("rep");
-  IntegerVector lens = lengths(lst);
-  int n = max(lens);
-  int lst_n = lst.size();
-  for (int i=0; i < lst_n; i++) {
-    if (n > 1) {
-      if (lens[i] == 1) {
-        lst[i] = rep(lst[i], n);
-      }
-    }
-  }
-// //  CharacterVector row_names = lst.attr("row.names");
-// //  int n = row_names.size();
-// //  lst.push_front(row_names, "row_names");
-  lst.attr("row.names") = IntegerVector::create(NA_INTEGER, -n);
-  lst.attr("class") = CharacterVector::create("wbl_df", "wbl", "tbl_df", "tbl", "data.frame");
-  return lst;
-}
-
 
 // [[Rcpp::export]]
 DataFrame add_data(DataFrame data, List lst) {

@@ -13,6 +13,10 @@ h_nodes.xml_document <- function(.x, .n) {
 }
 
 h_nodes.xml_nodeset <- function(.x, .n) {
+  lapply(.x, h_nodes, .n)
+}
+
+h_nodes.xml_node <- function(.x, .n) {
   xml2::xml_find_all(.x, selectr::css_to_xpath(.n))
 }
 
@@ -56,6 +60,17 @@ h_text.xml_nodeset <- function(.x, ...) {
   args <- tfse::add_arg_if(args, trim = TRUE)
   do_call(xml2::xml_text, args)
 }
+
+h_text.xml_node <- function(.x, ...) {
+  args <- capture_dots(x = .x, ...)
+  args <- tfse::add_arg_if(args, trim = TRUE)
+  do_call(xml2::xml_text, args)
+}
+
+h_text.list <- function(.x, ...) {
+  dapr::vap_chr(.x, h_text, ...)
+}
+
 
 capture_dots <- function (...) {
   eval(substitute(alist(...)), envir = parent.frame())

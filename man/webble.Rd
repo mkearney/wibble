@@ -4,10 +4,10 @@
 \alias{webble}
 \title{Webble}
 \usage{
-webble(url)
+webble(path)
 }
 \arguments{
-\item{url}{Path to file/URL of XML source code}
+\item{path}{Path/URL to page of XML source code}
 }
 \value{
 An xml_document

@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <curl/curl.h>
+#include <fstream>
 
 using namespace Rcpp;
 
@@ -32,3 +33,25 @@ List webble_call(std::string url) {
   if (curl!=NULL) curl_easy_cleanup(curl);
   return f(res);
 }
+
+
+//
+// // [[Rcpp::export]]
+// std::string read_file_call(std::string path) {
+//   std::ifstream file(path);
+//   std::stringstream ss(file);
+//   std::string res = "";
+//   if(!ss.eof()) res = ss.str();
+//   return res;
+// }
+
+//
+// CharacterVector read_file_call(std::string path) {
+//   std::streampos begin,end;
+//   std::ifstream myfile (path, ios::binary);
+//   begin = myfile.tellg();
+//   myfile.seekg (0, ios::end);
+//   end = myfile.tellg();
+//   myfile.close();
+//   cout << "size is: " << (end-begin) << " bytes.\n";
+// return 0;

@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// read_file_call
+List read_file_call(CharacterVector path);
+RcppExport SEXP _wibble_read_file_call(SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type path(pathSEXP);
+    rcpp_result_gen = Rcpp::wrap(read_file_call(path));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wabble_call
 CharacterVector wabble_call(std::string url, List query, std::string path);
 RcppExport SEXP _wibble_wabble_call(SEXP urlSEXP, SEXP querySEXP, SEXP pathSEXP) {
@@ -91,6 +102,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_wibble_read_file_call", (DL_FUNC) &_wibble_read_file_call, 1},
     {"_wibble_wabble_call", (DL_FUNC) &_wibble_wabble_call, 3},
     {"_wibble_api_calls", (DL_FUNC) &_wibble_api_calls, 4},
     {"_wibble_webble_call", (DL_FUNC) &_wibble_webble_call, 1},

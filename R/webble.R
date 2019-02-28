@@ -15,9 +15,7 @@ webble.default <- function(path) {
     is.character(path)
   )
   if (!grepl("http", path) && file.exists(path)) {
-    x <- paste(tfse::readlines(path), collapse = "\n")
-    suppressWarnings(xml2:::read_xml.raw(charToRaw(x),
-      "UTF-8", as_html = TRUE, options = 289L))
+    read_file_call(path)
   } else {
     webble_call(path)
   }

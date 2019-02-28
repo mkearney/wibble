@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // read_file_call
-List read_file_call(CharacterVector path);
+CharacterVector read_file_call(CharacterVector path);
 RcppExport SEXP _wibble_read_file_call(SEXP pathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -44,7 +44,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // webble_call
-List webble_call(std::string url);
+CharacterVector webble_call(std::string url);
 RcppExport SEXP _wibble_webble_call(SEXP urlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

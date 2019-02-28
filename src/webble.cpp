@@ -14,9 +14,7 @@ static size_t  web_write(void *ptr,
 }
 
 // [[Rcpp::export]]
-List webble_call(std::string url) {
-  ExpressionVector exp("function(x) suppressWarnings(xml2:::read_xml.raw(charToRaw(x), 'UTF-8', as_html = TRUE, options = 289L))");
-  Function f = exp.eval();
+CharacterVector webble_call(std::string url) {
 
   CURL *curl = curl_easy_init();
   std::stringstream ss;
@@ -30,6 +28,6 @@ List webble_call(std::string url) {
     if(!ss.eof()) res = ss.str();
   }
   if (curl!=NULL) curl_easy_cleanup(curl);
-  return f(res);
+  return res;
 }
 

@@ -1,3 +1,12 @@
+
+as_xml <- function(x) {
+  suppressWarnings({
+    x <- xml2:::doc_parse_raw(x, encoding = "UTF-8", base_url = "",
+      as_html = TRUE, options = 289L)
+    xml2:::xml_document(x)
+  })
+}
+
 subtrunc <- function(x, n) {
   if (nchar(x) > n) {
     x <- paste0(substr(x, 1, n), "\U2026")

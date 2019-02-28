@@ -5,6 +5,14 @@ read_file_call <- function(path) {
     .Call(`_wibble_read_file_call`, path)
 }
 
+tokenize_wrd_call <- function(strings) {
+    .Call(`_wibble_tokenize_wrd_call`, strings)
+}
+
+tokenize_chr_call <- function(strings) {
+    .Call(`_wibble_tokenize_chr_call`, strings)
+}
+
 wabble_call <- function(url, query, path = "") {
     .Call(`_wibble_wabble_call`, url, query, path)
 }

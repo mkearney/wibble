@@ -16,6 +16,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// tokenize_wrd_call
+Rcpp::List tokenize_wrd_call(std::vector<std::string> strings);
+RcppExport SEXP _wibble_tokenize_wrd_call(SEXP stringsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type strings(stringsSEXP);
+    rcpp_result_gen = Rcpp::wrap(tokenize_wrd_call(strings));
+    return rcpp_result_gen;
+END_RCPP
+}
+// tokenize_chr_call
+Rcpp::List tokenize_chr_call(std::vector<std::string> strings);
+RcppExport SEXP _wibble_tokenize_chr_call(SEXP stringsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type strings(stringsSEXP);
+    rcpp_result_gen = Rcpp::wrap(tokenize_chr_call(strings));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wabble_call
 CharacterVector wabble_call(std::string url, List query, std::string path);
 RcppExport SEXP _wibble_wabble_call(SEXP urlSEXP, SEXP querySEXP, SEXP pathSEXP) {
@@ -103,6 +125,8 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_wibble_read_file_call", (DL_FUNC) &_wibble_read_file_call, 1},
+    {"_wibble_tokenize_wrd_call", (DL_FUNC) &_wibble_tokenize_wrd_call, 1},
+    {"_wibble_tokenize_chr_call", (DL_FUNC) &_wibble_tokenize_chr_call, 1},
     {"_wibble_wabble_call", (DL_FUNC) &_wibble_wabble_call, 3},
     {"_wibble_api_calls", (DL_FUNC) &_wibble_api_calls, 4},
     {"_wibble_webble_call", (DL_FUNC) &_wibble_webble_call, 1},

@@ -1,5 +1,6 @@
 
 as_xml <- function(x) {
+  x <- charToRaw(enc2utf8(x))
   suppressWarnings({
     x <- xml2:::doc_parse_raw(x, encoding = "UTF-8", base_url = "",
       as_html = TRUE, options = 289L)

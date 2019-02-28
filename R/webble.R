@@ -15,8 +15,9 @@ webble.default <- function(path) {
     is.character(path)
   )
   if (!grepl("http", path) && file.exists(path)) {
-    read_file_call(path)
+    x <- read_file_call(path)
   } else {
-    webble_call(path)
+    x <- webble_call(path)
   }
+  as_xml(x)
 }
